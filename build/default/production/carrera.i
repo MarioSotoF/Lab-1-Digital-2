@@ -2513,6 +2513,57 @@ extern __bank0 __bit __timeout;
 # 28 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16Fxxx_DFP/1.2.33/xc8\\pic\\include\\xc.h" 2 3
 # 24 "carrera.c" 2
 # 37 "carrera.c"
+void setup (void);
+void semaforo(void);
+void delay(unsigned char n);
+# 52 "carrera.c"
 void main(void) {
+
+    setup();
+    delay(1000);
+    while(1){
+
+        if (PORTAbits.RA0 == 0){
+            semaforo();
+        }
+    }
+
+
+
     return;
+}
+
+void delay(unsigned char n) {
+    for (int i = 0; i < 255; i++) {
+        for (int j = 0; j < 255; j++) {
+        }
+    }
+}
+void setup (void) {
+
+    ANSEL = 0;
+    ANSELH = 0;
+    TRISB = 0;
+    TRISA = 0b00000001;
+    PORTB = 0;
+    PORTB = 0;
+
+}
+
+void semaforo (void){
+
+    PORTBbits.RB0 = 0;
+    PORTBbits.RB1 = 0;
+    PORTBbits.RB2 = 1;
+    delay(1000);
+
+    PORTBbits.RB0 = 0;
+    PORTBbits.RB1 = 1;
+    PORTBbits.RB2 = 0;
+    delay(1000);
+
+    PORTBbits.RB0 = 1;
+    PORTBbits.RB1 = 0;
+    PORTBbits.RB2 = 0;
+    delay(1000);
 }

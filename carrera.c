@@ -34,6 +34,74 @@
 
 #include <xc.h>
 
+void setup (void);
+void semaforo(void);
+void delay(unsigned char n);
+//deinimos nuestro tiepo para 4Mhz
+
+#define _XTAL_FREQ 4000000
+
+
+#define lverde      PORTBbits.RB0
+#define lamarillo   PORTBbits.RB1
+#define lrojo       PORTBbits.RB2
+
+
+
+
 void main(void) {
+    
+    setup();
+    delay(1000);
+    while(1){
+        
+        if (PORTAbits.RA0 == 0){
+            semaforo();
+        }
+    }
+    
+    
+    
     return;
 }
+
+void delay(unsigned char n) {
+    for (int i = 0; i < 255; i++) {
+        for (int j = 0; j < 255; j++) {
+        }
+    }
+}
+void setup (void) {
+    
+    ANSEL   = 0;
+    ANSELH  = 0;
+    TRISB   = 0;
+    TRISA   = 0b00000001; //BOTÓN SEMAFORO
+    PORTB   = 0;
+    PORTB   = 0;
+    
+}
+
+void semaforo (void){
+    
+    lverde      = 0;
+    lamarillo   = 0;
+    lrojo       = 1;
+    delay(1000);
+    
+    lverde      = 0;
+    lamarillo   = 1;
+    lrojo       = 0;
+    delay(1000);
+    
+    lverde      = 1;
+    lamarillo   = 0;
+    lrojo       = 0;
+    delay(1000);
+    
+    
+}
+
+
+
+
