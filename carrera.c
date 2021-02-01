@@ -37,6 +37,9 @@
 void setup (void);
 void semaforo(void);
 void delay(unsigned char n);
+void jugador1(unsigned char j1);
+void jugador2(unsigned char j2);
+
 //deinimos nuestro tiepo para 4Mhz
 
 #define _XTAL_FREQ 4000000
@@ -45,7 +48,8 @@ void delay(unsigned char n);
 #define lverde      PORTBbits.RB0
 #define lamarillo   PORTBbits.RB1
 #define lrojo       PORTBbits.RB2
-
+unsigned char j1;
+unsigned char j2;
 
 
 
@@ -75,10 +79,16 @@ void setup (void) {
     
     ANSEL   = 0;
     ANSELH  = 0;
-    TRISB   = 0;
-    TRISA   = 0b00000001; //BOTÓN SEMAFORO
+    TRISB   = 0;//LEDS SEMAFORO
+    TRISC   = 0;//LEDS J1
+    TRISD   = 0;//LEDS J2
+    TRISA   = 0b00000111; //Botones
+    
+    //LIMPIAMOS PUERTOS
+    PORTA   = 0;
     PORTB   = 0;
-    PORTB   = 0;
+    PORTC   = 0;
+    PORTD   = 0;
     
 }
 
@@ -103,5 +113,83 @@ void semaforo (void){
 }
 
 
+void jugador1(unsigned char j1){
+    if (j1 == 8){
+        PORTBbits.RB3 = 1;
+        delay(1000);
+        
+        switch(j1){
+            case 1:
+                PORTCbits.RC0 = 1;
+                break;
+            
+            case 2:
+                PORTCbits.RC1 = 1;
+            
+            case 3:
+                PORTCbits.RC2 = 1;
+                break;
+            
+            case 4:
+                PORTCbits.RC3 = 1;
+            
+            case 5:
+                PORTCbits.RC4 = 1;
+                break;
+            
+            case 6:
+                PORTCbits.RC5 = 1;
+            
+            case 7:
+                PORTCbits.RC6 = 1;
+                break;
+            
+            case 8:
+                PORTCbits.RC3 = 1;
+                
+        }
+        
+    }
+
+}
 
 
+void jugador2(unsigned char j2){
+    if (j2 == 8){
+        PORTBbits.RB4 = 1;
+        delay(1000);
+        
+        switch(j2){
+            case 1:
+                PORTDbits.RD0 = 1;
+                break;
+            
+            case 2:
+                PORTDbits.RD1 = 1;
+            
+            case 3:
+                PORTDbits.RD2 = 1;
+                break;
+            
+            case 4:
+                PORTDbits.RD3 = 1;
+            
+            case 5:
+                PORTCbits.RC4 = 1;
+                break;
+            
+            case 6:
+                PORTDbits.RD5 = 1;
+            
+            case 7:
+                PORTDbits.RD6 = 1;
+                break;
+            
+            case 8:
+                PORTDbits.RD3 = 1;
+                
+        }
+        
+    }
+
+}
